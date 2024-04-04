@@ -5,6 +5,7 @@
     <SatelliteResourceLanguages>none</SatelliteResourceLanguages>
     <DebugType>embedded</DebugType>
     <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>

@@ -46,10 +46,10 @@
                      Text="{Binding TrackNo}" Foreground="White" VerticalAlignment="Center"/>
         </Border>
       </Grid>
-      <Button Classes="clear" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" Padding="2,1,0,0" Height="18"
+      <Button Classes="clear" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" Padding="2,1,0,0" Height="18" FontWeight="Normal"
               HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Focusable="False"
               Content="{Binding TrackName}" Click="TrackNameButtonClicked"/>
-      <Button Classes="clear" Grid.Row="1" Grid.Column="2" Margin="1" Padding="2,1,0,0" Height="18"
+      <Button Classes="clear" Grid.Row="1" Grid.Column="2" Margin="1" Padding="2,1,0,0" Height="18" FontWeight="Normal"
               HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Focusable="False"
               Content="{Binding Singer, TargetNullValue={StaticResource tracks.selectsinger}}" Click="SingerButtonClicked" ContextRequested="SingerButtonContextRequested"
               ToolTip.Tip="{Binding Singer}">
@@ -90,7 +90,7 @@
           </ContextMenu>
         </Button.ContextMenu>
       </Button>
-      <Button Classes="clear" Grid.Row="2" Grid.Column="2" Margin="1" Padding="2,1,0,0" Height="18"
+      <Button Classes="clear" Grid.Row="2" Grid.Column="2" Margin="1" Padding="2,1,0,0" Height="18" FontWeight="Normal"
               HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Focusable="False"
               Content="{Binding PhonemizerTag}" Click="PhonemizerButtonClicked" ContextRequested="PhonemizerButtonContextRequested"
               ToolTip.Tip="{Binding Phonemizer}">
@@ -107,7 +107,7 @@
           </ContextMenu>
         </Button.ContextMenu>
       </Button>
-      <Button Classes="clear" Grid.Row="3" Grid.Column="2" Margin="1" Padding="2,1,0,0" Height="18"
+      <Button Classes="clear" Grid.Row="3" Grid.Column="2" Margin="1" Padding="2,1,0,0" Height="18" FontWeight="Normal"
               HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Focusable="False"
               Content="{Binding Renderer}" Click="RendererButtonClicked" ContextRequested="RendererButtonContextRequested"
               ToolTip.Tip="{DynamicResource tracks.selectrenderer}">
@@ -164,27 +164,27 @@
         </Path>
       </Button>
       <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2">
-        <Slider Name="VolumeSlider" Margin="1,0,0,0" Width="102" HorizontalAlignment="Left" Classes="fader" Minimum="-24" Maximum="12" Value="{Binding Volume}"
+        <Slider Name="VolumeSlider" Margin="1,0,0,0" Width="100" HorizontalAlignment="Left" Classes="fader" Minimum="-24" Maximum="12" Value="{Binding Volume}"
                 PointerPressed="VolumeFaderPointerPressed" ValueChanged="VolumeOrPanSliderValueChanged"
                 ContextRequested="VolumeFaderContextRequested" IsEnabled="{Binding !Muted}"/>
-        <TextBlock Margin="106,3,0,0" Width="24" HorizontalAlignment="Left" Background="Transparent"
-                   TextAlignment="Center" FontSize="9" FontFamily="monospace" PointerPressed="VolumePointerPressed">
+        <TextBlock Margin="100,3,0,0" Width="30" HorizontalAlignment="Left" Background="Transparent"
+                   TextAlignment="Center" FontSize="10" FontFamily="monospace" PointerPressed="VolumePointerPressed">
           <TextBlock.Text>
             <MultiBinding StringFormat="{}{0:+#00.0;-#00.0}">
               <Binding Path="Volume"/>
             </MultiBinding>
           </TextBlock.Text>
         </TextBlock>
-        <TextBox Name="VolumeTextBox" Margin="106,3,0,0" Width="28" MinWidth="28" Height="16" MinHeight="16"
+        <TextBox Name="VolumeTextBox" Margin="100,3,0,0" Width="30" MinWidth="30" Height="16" MinHeight="16"
                  HorizontalAlignment="Left" BorderThickness="0" Padding="2,0" IsVisible="False" IsEnabled="False"
-                 TextAlignment="Right" FontSize="9" FontFamily="monospace"
+                 TextAlignment="Right" FontSize="10" FontFamily="monospace"
                  KeyDown="VolumeOrPanTextBoxKeyDown" LostFocus="VolumeOrPanTextBoxLostFocus"/>
-        <Slider Name="PanSlider" Margin="134,0,0,0" Width="36" HorizontalAlignment="Left"
+        <Slider Name="PanSlider" Margin="132,0,0,0" Width="34" HorizontalAlignment="Left"
                 Classes="fader" Minimum="-100" Maximum="100" Value="{Binding Pan}"
                 PointerPressed="PanFaderPointerPressed" ValueChanged="VolumeOrPanSliderValueChanged"
                 ContextRequested="PanFaderContextRequested" IsEnabled="{Binding !Muted}"/>
-        <TextBlock Margin="0,3,4,0" Width="20" HorizontalAlignment="Right" Background="Transparent"
-                   TextAlignment="Right" FontSize="9" FontFamily="monospace" PointerPressed="PanPointerPressed">
+        <TextBlock Margin="0,3,4,0" Width="22" HorizontalAlignment="Right" Background="Transparent"
+                   TextAlignment="Center" FontSize="10" FontFamily="monospace" PointerPressed="PanPointerPressed">
           <TextBlock.Text>
             <MultiBinding StringFormat="{}{0:00R;00L;C}">
               <Binding Path="Pan"/>
@@ -193,7 +193,7 @@
         </TextBlock>
         <TextBox Name="PanTextBox" Margin="0,3,2,0" Width="24" MinWidth="24" Height="16" MinHeight="16"
                  HorizontalAlignment="Right" BorderThickness="0" Padding="2,0" IsVisible="False" IsEnabled="False"
-                 TextAlignment="Right" FontSize="9" FontFamily="monospace"
+                 TextAlignment="Right" FontSize="10" FontFamily="monospace"
                  KeyDown="VolumeOrPanTextBoxKeyDown" LostFocus="VolumeOrPanTextBoxLostFocus"/>
       </Grid>
       <Grid.ContextMenu>

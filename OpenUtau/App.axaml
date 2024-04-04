@@ -31,10 +31,13 @@
         <ResourceInclude Source="/Colors/Brushes.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
+    <Thickness x:Key="MenuIconPresenterMargin">0,0,4,0</Thickness>
   </Application.Resources>
   <Application.Styles>
     <FluentTheme />
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+    <!--<StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
+    <StyleInclude Source="avares://Semi.Avalonia.DataGrid/Index.axaml" />-->
     <StyleInclude Source="/Styles/Styles.axaml"/>
   </Application.Styles>
   <NativeMenu.Menu>

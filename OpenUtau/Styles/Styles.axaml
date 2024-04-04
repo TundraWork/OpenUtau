@@ -43,7 +43,7 @@
     <Setter Property="Margin" Value="2,0" />
     <Setter Property="Height" Value="1" />
   </Style>
-
+  
   <Style Selector="ContextMenu MenuItem">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="FontSize" Value="12"/>
@@ -63,7 +63,7 @@
     <Setter Property="Margin" Value="0,0,0,4"/>
     <Setter Property="FontSize" Value="12"/>
     <Setter Property="VerticalAlignment" Value="Top"/>
-    <Setter Property="SelectionForegroundBrush" Value="White"/>
+    <Setter Property="SelectionForegroundBrush" Value="{DynamicResource TextBoxBackgroundThemeBrush}"/>
   </Style>
   <Style Selector="TextBox:disabled">
     <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundDisabled}" />
@@ -72,7 +72,7 @@
   <Style Selector="Button">
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="FontSize" Value="12"/>
-    <Setter Property="Height" Value="20"/>
+    <Setter Property="Height" Value="22"/>
     <Setter Property="Margin" Value="0,4"/>
     <Setter Property="Padding" Value="4,0,4,2"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -99,7 +99,7 @@
   <Style Selector="Button.clear">
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="FontSize" Value="12"/>
-    <Setter Property="Height" Value="20"/>
+    <Setter Property="Height" Value="22"/>
     <Setter Property="Margin" Value="0,4"/>
     <Setter Property="Padding" Value="4,0,4,2"/>
     <Setter Property="Background" Value="Transparent"/>
@@ -113,7 +113,7 @@
   <Style Selector="ToggleButton.normal">
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="FontSize" Value="12"/>
-    <Setter Property="Height" Value="20"/>
+    <Setter Property="Height" Value="22"/>
     <Setter Property="Margin" Value="0,4"/>
     <Setter Property="Padding" Value="4,0,4,2"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -140,7 +140,7 @@
   <Style Selector="ToggleButton.toolbar">
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="FontSize" Value="12"/>
-    <Setter Property="Height" Value="20"/>
+    <Setter Property="Height" Value="22"/>
     <Setter Property="Margin" Value="0,4"/>
     <Setter Property="Padding" Value="4,0,4,2"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -175,23 +175,23 @@
       <Setter Property="Stroke" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
     </Style>
   </Style>
-
+  
   <Style Selector="ToggleSwitch /template/ Border#SwitchKnobBounds">
     <Setter Property="Background" Value="{DynamicResource AccentBrush1}"/>
   </Style>
-
+  
   <Style Selector="ComboBox">
     <Setter Property="Background" Value="{DynamicResource SystemRegionBrush}"/>
     <Setter Property="FontSize" Value="12"/>
-    <Setter Property="MinHeight" Value="20"/>
-    <Setter Property="Height" Value="20"/>
+    <Setter Property="MinHeight" Value="22"/>
+    <Setter Property="Height" Value="22"/>
     <Setter Property="Margin" Value="0,4"/>
     <Setter Property="Padding" Value="4,0,0,2"/>
   </Style>
   <Style Selector="ComboBoxItem">
     <Setter Property="FontSize" Value="12"/>
-    <Setter Property="MinHeight" Value="20"/>
-    <Setter Property="Height" Value="20"/>
+    <Setter Property="MinHeight" Value="22"/>
+    <Setter Property="Height" Value="22"/>
     <Setter Property="Margin" Value="0"/>
     <Setter Property="Padding" Value="4,2,0,0"/>
   </Style>
@@ -205,7 +205,7 @@
     <Setter Property="Padding" Value="4"/>
     <Setter Property="Margin" Value="0"/>
   </Style>
-
+  
   <Style Selector="CheckBox">
     <Setter Property="MinHeight" Value="20" />
     <Setter Property="MinWidth" Value="20" />
@@ -258,7 +258,7 @@
     <Setter Property="CornerRadius" Value="4"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="BorderBrush" Value="{DynamicResource NeutralAccentBrushSemi}"/>
-    <Setter Property="Height" Value="20"/>
+    <Setter Property="Height" Value="24"/>
   </Style>
   <Style Selector="Border.playback TextBlock">
     <Setter Property="Padding" Value="6,0,0,1"/>
@@ -275,7 +275,7 @@
     <Setter Property="Margin" Value="0"/>
     <Setter Property="Padding" Value="0"/>
     <Setter Property="Width" Value="21"/>
-    <Setter Property="Height" Value="19"/>
+    <Setter Property="Height" Value="23"/>
     <Setter Property="Background" Value="Transparent"/>
   </Style>
 
@@ -402,8 +402,8 @@
                 </Track.IncreaseButton>
                 <Thumb
                     Name="thumb"
-                    Width="{DynamicResource SliderHorizontalThumbWidth}"
-                    Height="{DynamicResource SliderHorizontalThumbHeight}"
+                    Width="8"
+                    Height="12"
                     Margin="0"
                     Padding="0"
                     Background="{TemplateBinding Foreground}"
@@ -424,7 +424,7 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
-          <Border Background="{TemplateBinding Background}" Height="6" Width="16" CornerRadius="2"/>
+          <Border Background="{TemplateBinding Background}" Height="12" Width="8" CornerRadius="2"/>
         </ControlTemplate>
       </Setter.Value>
     </Setter>

@@ -79,19 +79,18 @@ namespace OpenUtau.Core.DiffSinger {
 
                     // calculate real depth
                     var singer = (DiffSingerSinger) phrase.singer;
-                    double depth = Preferences.Default.DiffSingerDepth;
+                    double depth;
                     int steps = Preferences.Default.DiffSingerSteps;
                     if (singer.dsConfig.useVariableDepth) {
                         double maxDepth = singer.dsConfig.maxDepth;
                         if (maxDepth < 0) {
                             throw new InvalidDataException("Max depth is unset or is negative.");
                         }
-                        depth = Math.Min(depth, maxDepth);  // make sure depth <= K_step
+                        depth = Math.Min(Preferences.Default.DiffSingerDepth, maxDepth);
+                    } else {
+                        depth = 1.0;
                     }
-                    // format depth with 3 decimal places
-                    var wavName = singer.dsConfig.useVariableDepth
-                        ? $"ds-{phrase.hash:x16}-depth{depth:f2}-steps{steps}.wav"  // if the depth changes, phrase should be re-rendered
-                        : $"ds-{phrase.hash:x16}-steps{steps}.wav";  // preserve this for models without depth
+                    var wavName = $"ds-{phrase.hash:x16}-depth{depth:f2}-steps{steps}.wav";
                     var wavPath = Path.Join(PathManager.Inst.CachePath, wavName);
                     string progressInfo = $"Track {trackNo + 1}: {this} depth={depth:f2} steps={steps} \"{string.Join(" ", phrase.phones.Select(p => p.phoneme))}\"";
                     if (File.Exists(wavPath)) {
@@ -362,15 +361,21 @@ namespace OpenUtau.Core.DiffSinger {
                         .Reshape(new int[] { 1, tension.Length })));
                 }
             }
-            Tensor<float> mel;
-            lock(acousticModel){
-                if(cancellation.IsCancellationRequested) {
-                    return null;
+            Onnx.VerifyInputNames(acousticModel, acousticInputs);
+            var acousticCache = Preferences.Default.DiffSingerTensorCache
+                ? new DiffSingerCache(singer.acousticHash, acousticInputs)
+                : null;
+            var acousticOutputs = acousticCache?.Load();
+            if (acousticOutputs is null) {
+                lock(acousticModel){
+                    if(cancellation.IsCancellationRequested) {
+                        return null;
+                    }
+                    acousticOutputs = acousticModel.Run(acousticInputs).Cast<NamedOnnxValue>().ToList();
                 }
-                Onnx.VerifyInputNames(acousticModel, acousticInputs);
-                var acousticOutputs = acousticModel.Run(acousticInputs);
-                mel = acousticOutputs.First().AsTensor<float>().Clone();
+                acousticCache?.Save(acousticOutputs);
             }
+            Tensor<float> mel = acousticOutputs.First().AsTensor<float>().Clone();
             //mel transforms for different mel base
             if (vocoder.mel_base != singer.dsConfig.mel_base) {
                 float k;
@@ -396,14 +401,20 @@ namespace OpenUtau.Core.DiffSinger {
             var vocoderInputs = new List<NamedOnnxValue>();
             vocoderInputs.Add(NamedOnnxValue.CreateFromTensor("mel", mel));
             vocoderInputs.Add(NamedOnnxValue.CreateFromTensor("f0",f0tensor));
-            Tensor<float> samplesTensor;
-            lock(vocoder){
-                if(cancellation.IsCancellationRequested) {
-                    return null;
+            var vocoderCache = Preferences.Default.DiffSingerTensorCache
+                ? new DiffSingerCache(vocoder.hash, vocoderInputs)
+                : null;
+            var vocoderOutputs = vocoderCache?.Load();
+            if (vocoderOutputs is null) {
+                lock(vocoder){
+                    if(cancellation.IsCancellationRequested) {
+                        return null;
+                    }
+                    vocoderOutputs = vocoder.session.Run(vocoderInputs).Cast<NamedOnnxValue>().ToList();
                 }
-                var vocoderOutputs = vocoder.session.Run(vocoderInputs);
-                samplesTensor = vocoderOutputs.First().AsTensor<float>();
+                vocoderCache?.Save(vocoderOutputs);
             }
+            Tensor<float> samplesTensor = vocoderOutputs.First().AsTensor<float>();
             //Check the size of samplesTensor
             int[] expectedShape = new int[] { 1, -1 };
             if(!DiffSingerUtils.ValidateShape(samplesTensor, expectedShape)){

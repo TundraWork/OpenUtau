@@ -613,8 +613,9 @@
                    IsVisible="{Binding NotesViewModel.ShowTips}" BoxShadow="0 0 5 1 #3F000000">
             <TextBlock Classes="tips" Text="{DynamicResource tip.notes.zoomy}"/>
           </Border>
-          <Border HorizontalAlignment="Center" VerticalAlignment="Center"
+          <Border HorizontalAlignment="Center" VerticalAlignment="Center" Padding="30" CornerRadius="4"
                 IsVisible="{Binding NotesViewModel.PlayPosWaitingRendering}">
+            <Border.Background><SolidColorBrush Color="White" Opacity="0.65"/></Border.Background>
             <TextBlock Text="{DynamicResource progress.waitingrendering}"/>
           </Border>
         </Grid>

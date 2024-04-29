@@ -257,10 +257,11 @@
             </ContextMenu>
           </c:PartsCanvas.ContextMenu>
         </c:PartsCanvas>
-        <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
-                BoxShadow="inset 0 0 5 1 #3F000000" ClipToBounds="True" IsHitTestVisible="False">
-          <Border HorizontalAlignment="Center" VerticalAlignment="Center"
-                  IsVisible="{Binding TracksViewModel.PlayPosWaitingRendering}">
+        <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Padding="30" CornerRadius="4" ClipToBounds="True" IsHitTestVisible="False"
+                IsVisible="{Binding TracksViewModel.PlayPosWaitingRendering}">
+          <Border.Background><SolidColorBrush Color="White" Opacity="0.65"/></Border.Background>
+          <Border HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="{DynamicResource progress.waitingrendering}"/>
           </Border>
         </Border>
